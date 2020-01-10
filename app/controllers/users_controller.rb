@@ -1,12 +1,9 @@
 class UsersController < ApplicationController
+
   def home
-    if session[:user_id]
-      @current_user = User.find(session[:user_id])
-    end
   end
 
   def login
-
   end
 
   def check
@@ -27,6 +24,14 @@ class UsersController < ApplicationController
       session[:user_id] = nil
       flash[:info] = "Vous êtes maintenant déconnecté"
       redirect_to "/users/home"
+    end
+  end
+
+  private
+
+  def set_current_user
+    if session[:user_id]
+      @current_user = User.find(session[:user_id])
     end
   end
 end
