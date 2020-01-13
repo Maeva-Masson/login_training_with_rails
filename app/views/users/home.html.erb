@@ -1,8 +1,15 @@
 
 <% if @current_user %>
-  <h1>Bienvenue <%= @current_user.name %>!</h1>
-  <%= form_tag "/users/login", method: :delete do %>
-    <input type="submit" value="Se déconnecter" />
+  <% if @current_user.role == "Admin" %>
+    <h1>Bienvenue administrateur <%= @current_user.name %>!</h1>
+    <%= form_tag "/users/login", method: :delete do %>
+      <input type="submit" value="Se déconnecter" />
+      <% end %>
+  <% else %>
+    <h1>Bienvenue <%= @current_user.name %>!</h1>
+    <%= form_tag "/users/login", method: :delete do %>
+      <input type="submit" value="Se déconnecter" />
+    <% end %>
   <% end %>
 <% else %>
   <h1>Bienvenue visiteur anonyme!</h1>

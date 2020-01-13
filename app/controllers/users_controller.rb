@@ -1,5 +1,14 @@
 class UsersController < ApplicationController
 
+
+  def index
+    if @current_user.try(:role) != "Admin"
+      flash[:info] = "Accès interdit"
+      return redirect_to request.referrer || "/users/home"
+    end
+    @users = User.all
+  end
+
   def home
   end
 
